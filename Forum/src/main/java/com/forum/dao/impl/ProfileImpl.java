@@ -4,66 +4,65 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import com.forum.dao.CommentDAO;
-import com.forum.entity.Comment;
+import com.forum.dao.ProfileDAO;
+import com.forum.entity.Profile;
 import com.sell.hibernateUI.HibernateUI;
 
-public class CommentImpl implements CommentDAO{
+public class ProfileImpl implements ProfileDAO {
 
-	public void insert(Comment comment) {
+	public void insert(Profile profile) {
 		Session session = HibernateUI.getSession();
 		try {
-			session.save(comment);
+			session.save(profile);
 			session.beginTransaction().commit();
-
 		} catch (Exception e) {
+			e.printStackTrace();
 			session.beginTransaction().rollback();
 		} finally {
 			session.close();
 		}
 	}
 
-	public void delete(Comment comment) {
+	public void delete(Profile profile) {
 		Session session = HibernateUI.getSession();
 		try {
-			session.delete(comment);
+			session.delete(profile);
 			session.beginTransaction().commit();
-
 		} catch (Exception e) {
+			e.printStackTrace();
 			session.beginTransaction().rollback();
 		} finally {
 			session.close();
 		}
 	}
 
-	public void update(Comment comment) {
+	public void update(Profile profile) {
 		Session session = HibernateUI.getSession();
 		try {
-			session.update(comment);
+			session.update(profile);
 			session.beginTransaction().commit();
-
 		} catch (Exception e) {
+			e.printStackTrace();
 			session.beginTransaction().rollback();
 		} finally {
 			session.close();
 		}
 	}
 
-	public Comment getComment(int id) {
-		Comment comment = null;
+	public Profile getProfile(int id) {
+		Profile profile = null;
 		Session session = HibernateUI.getSession();
-		comment = session.get(Comment.class, id);
+		profile = session.get(Profile.class, id);
 		session.close();
-		return comment;
+		return profile;
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Comment> getListComment() {
-		List<Comment> list = null;
+	public List<Profile> getListProfile() {
 		Session session = HibernateUI.getSession();
-		list = session.createQuery("From " + Comment.class.getName()).getResultList();
+		@SuppressWarnings("unchecked")
+		List<Profile> listProfiles = session.createQuery("From " + Profile.class.getName()).getResultList();
 		session.close();
-		return list;
+		return listProfiles;
 	}
 
 }

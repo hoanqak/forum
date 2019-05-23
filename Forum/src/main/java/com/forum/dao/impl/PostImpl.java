@@ -4,64 +4,67 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import com.forum.dao.CommentDAO;
-import com.forum.entity.Comment;
+import com.forum.dao.PostDAO;
+import com.forum.entity.Post;
 import com.sell.hibernateUI.HibernateUI;
 
-public class CommentImpl implements CommentDAO{
+public class PostImpl implements PostDAO{
 
-	public void insert(Comment comment) {
+	public void insert(Post post) {
 		Session session = HibernateUI.getSession();
 		try {
-			session.save(comment);
+			session.save(post);
 			session.beginTransaction().commit();
-
-		} catch (Exception e) {
+		}catch (Exception e) {
+			// TODO: handle exception
 			session.beginTransaction().rollback();
-		} finally {
+		}
+		finally {
 			session.close();
 		}
 	}
 
-	public void delete(Comment comment) {
+	public void delete(Post post) {
 		Session session = HibernateUI.getSession();
 		try {
-			session.delete(comment);
+			session.delete(post);
 			session.beginTransaction().commit();
-
-		} catch (Exception e) {
+		}catch (Exception e) {
+			// TODO: handle exception
 			session.beginTransaction().rollback();
-		} finally {
+		}
+		finally {
 			session.close();
 		}
 	}
 
-	public void update(Comment comment) {
+	public void update(Post post) {
 		Session session = HibernateUI.getSession();
 		try {
-			session.update(comment);
+			session.update(post);
 			session.beginTransaction().commit();
-
-		} catch (Exception e) {
+		}catch (Exception e) {
+			// TODO: handle exception
 			session.beginTransaction().rollback();
-		} finally {
+		}
+		finally {
 			session.close();
 		}
 	}
 
-	public Comment getComment(int id) {
-		Comment comment = null;
+	public Post getPost(int id) {
+		Post post =  null;
 		Session session = HibernateUI.getSession();
-		comment = session.get(Comment.class, id);
+		post = session.get(Post.class, id);
 		session.close();
-		return comment;
+		return post;
 	}
-
+	
 	@SuppressWarnings("unchecked")
-	public List<Comment> getListComment() {
-		List<Comment> list = null;
+	public List<Post> getListPost(){
 		Session session = HibernateUI.getSession();
-		list = session.createQuery("From " + Comment.class.getName()).getResultList();
+		List<Post> list = null;
+		list = session.createQuery("From " + Post.class.getName()).getResultList();
 		session.close();
 		return list;
 	}

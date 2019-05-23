@@ -6,6 +6,7 @@ import org.hibernate.Session;
 
 import com.forum.dao.CategoryDAO;
 import com.forum.entity.Category;
+import com.forum.entity.StatusCategory;
 import com.sell.hibernateUI.HibernateUI;
 
 public class CategoryImpl implements CategoryDAO {
@@ -13,7 +14,16 @@ public class CategoryImpl implements CategoryDAO {
 	public void insert(Category category) {
 		Session session = HibernateUI.getSession();
 		try {
+			StatusCategory statusCategory = session.get(StatusCategory.class, 1);
+			if(statusCategory == null) {
+				statusCategory = new StatusCategory("open");
+				session.save(statusCategory);
+			}
+			statusCategory = session.get(StatusCategory.class, 1);
+			category.setStatusCategory(statusCategory);
 			session.save(category);
+			session.beginTransaction().commit();
+
 		} catch (Exception e) {
 			session.beginTransaction().rollback();
 		} finally {
@@ -25,6 +35,8 @@ public class CategoryImpl implements CategoryDAO {
 		Session session = HibernateUI.getSession();
 		try {
 			session.delete(category);
+			session.beginTransaction().commit();
+
 		} catch (Exception e) {
 			session.beginTransaction().rollback();
 		} finally {
@@ -36,6 +48,7 @@ public class CategoryImpl implements CategoryDAO {
 		Session session = HibernateUI.getSession();
 		try {
 			session.update(category);
+			session.beginTransaction().commit();
 		} catch (Exception e) {
 			session.beginTransaction().rollback();
 		} finally {
