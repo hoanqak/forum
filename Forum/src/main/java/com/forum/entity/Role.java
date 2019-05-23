@@ -20,7 +20,6 @@ public class Role {
 	private int id;
 	@Column
 	private String role;
-
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
 	private List<Account> listAccounts;
 

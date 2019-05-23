@@ -8,13 +8,10 @@ public class Main {
 
 	public static void main(String[] args) {
 		SessionFactory factory = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
-		Session session = factory.getCurrentSession();
-
-		Account account = new Account("admin", "123");
-		session.save(account);
+		Session session = factory.openSession();
+		Role role = session.get(Role.class, 1);
+		System.out.println(role.getRole());
 		session.beginTransaction().commit();
-
-		System.out.println(session.isConnected());
 		session.close();
 	}
 
