@@ -30,11 +30,13 @@ public class Category {
 	@ManyToOne
 	@JoinColumn(name = "status")
 	private StatusCategory statusCategory;
-	@CreationTimestamp
+
 	@Column(name = "create_date")
+	@CreationTimestamp
 	private Date createDate;
-	@UpdateTimestamp
+
 	@Column(name = "update_date")
+	@UpdateTimestamp
 	private Date updateDate;
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "category")
 	private List<Post> listPost;
@@ -48,12 +50,17 @@ public class Category {
 		this.updateDate = updateDate;
 	}
 
-	public Category(String link, String categoryName, Date createDate, Date updateDate) {
+	public Category(String link, String categoryName) {
 		super();
 		this.link = link;
 		this.categoryName = categoryName;
-		this.createDate = createDate;
-		this.updateDate = updateDate;
+	}
+
+	public Category(String link, String categoryName, StatusCategory statusCategory) {
+		super();
+		this.link = link;
+		this.categoryName = categoryName;
+		this.statusCategory = statusCategory;
 	}
 
 	public Category() {

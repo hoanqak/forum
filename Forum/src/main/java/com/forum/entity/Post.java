@@ -26,9 +26,9 @@ public class Post {
 	private int id;
 	@Column(name = "title", length = 100)
 	private String title;
-	@Column(length = 100)
+	@Column(length = 100, name = "sort_description")
 	private String sortDescription;
-	@Column(length = 1000)
+	@Column(length = 1000, name = "long_description")
 	private String longDescription;
 	@Column(name = "create_date")
 	@CreationTimestamp
