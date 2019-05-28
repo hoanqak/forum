@@ -9,4 +9,12 @@ public class MainController {
     public String home(){
         return "index";
     }
+    @RequestMapping("/post")
+    public String post(){
+        return "post";
+    }
+    @RequestMapping("/login")
+    public String login(){
+        return "login";
+    }
 }

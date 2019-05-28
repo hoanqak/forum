@@ -12,23 +12,46 @@
 <head>
     <title><dec:title>Home</dec:title></title>
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/> "/>
-    <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/post-css.css"/>"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+          integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script src="<c:url value="/resources/js/jquery-3.4.1.min.js"/>"></script>
 </head>
 <body>
 
-<div class="container shadow-sm p-3 mb-5 bg-white rounded">
-    <!-- header -->
-    <div class="row menu mb-5 position-sticky sticky-top">
-        <ul>
-            <li><a href="#">Trang chủ</a></li>
-            <li><a href="#">Diễn đàn</a></li>
-            <li><a href="#">Đăng nhập</a></li>
-            <li><a href="#">Đăng ký</a></li>
-            <li></li>
-        </ul>
-
+<!-- header -->
+<c:if test="${sessionScope.user == null}">
+    <div class="form-login">
+        <div class="main-form">
+            <h1 style="text-align: center">Đăng nhập</h1>
+            <div class="btn-close">x</div>
+            <form method="post">
+                <div class="form-group">
+                    <label>Tên đăng nhập: </label><input type="text" id="username" name="username" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Mật khẩu: </label><input type="password" id="password" name="password" class="form-control">
+                </div>
+                <div class="b">
+                    <button type="button" id="btn" class="btn btn-primary">Đăng nhập</button>
+                </div>
+                <a href="#">Quên mật khẩu</a>
+            </form>
+        </div>
+    </div>
+    <script src="<c:url value="/resources/js/login.js"/>"></script>
+</c:if>
+<div class="container">
+    <div class="row mb-5 position-sticky sticky-top">
+        <div class="menu">
+            <a href="${  pageContext.request.contextPath}">Trang chủ</a>
+            <a href="${ pageContext.request.contextPath}/forum">Diễn đàn</a>
+            <c:if test="${sessionScope.user == null}">
+                <a id="login">Đăng nhập</a>
+                <a href="${ pageContext.request.contextPath}/register">Đăng ký</a>
+            </c:if>
+        </div>
     </div>
     <!-- end header -->
     <dec:body/>

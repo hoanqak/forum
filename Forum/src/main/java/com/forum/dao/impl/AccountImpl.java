@@ -7,7 +7,9 @@ import org.hibernate.Session;
 import com.forum.dao.AccountDAO;
 import com.forum.entity.Account;
 import com.sell.hibernateUI.HibernateUI;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class AccountImpl implements AccountDAO{
 
 	public void insert(Account account) {
@@ -69,4 +71,10 @@ public class AccountImpl implements AccountDAO{
 		return list;
 	}
 
+	public static void main(String[] args) {
+		AccountImpl accountimpl = new AccountImpl();
+		for (Account account : accountimpl.getListAccount()) {
+			System.out.println(account);
+		}
+	}
 }

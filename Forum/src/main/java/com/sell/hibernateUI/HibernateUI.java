@@ -10,7 +10,7 @@ public final class HibernateUI {
 	private static Session session;
 
 	public static SessionFactory getSessionFactory() {
-		sessionFactory = new Configuration().configure("Hibernate/hibernate.cfg.xml").buildSessionFactory();
+		sessionFactory = new Configuration().configure().buildSessionFactory();
 		return sessionFactory;
 	}
 

@@ -139,12 +139,11 @@ create table image_desctiption_reply(
     foreign key(id_reply) references reply_comment(id)
 );
 
-alter table comment add column create_date datetime;
-alter table comment add column update_date datetime;
 alter table reply_comment add column create_date datetime;
 alter table reply_comment add column update_date datetime;
 alter table category add column create_date datetime;
 alter table category add column update_date datetime;
+alter table post add column sort_description varchar(100);
 insert into role values('admin');
 insert into role values('user');
 
