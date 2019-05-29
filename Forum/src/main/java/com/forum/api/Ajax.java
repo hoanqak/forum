@@ -28,4 +28,30 @@ public class Ajax {
         }
         return "0";
     }
+    @PostMapping("/register")
+    public String register(HttpServletRequest request){
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        if(username.length() <= 5 || password.length() < 8){
+            return "0";
+        }else {
+            for (Account account: accountimpl.getListAccount()) {
+                if(username.equals(account.getUsername())){
+                    return "0";
+                }
+            }
+            accountimpl.insert(new Account(username, password));
+            return "1";
+        }
+    }
+    @PostMapping("/check-username")
+    public String checkUsername(HttpServletRequest request){
+        String username = request.getParameter("username");
+        for (Account account: accountimpl.getListAccount()) {
+            if(username.equals(account.getUsername())){
+                return "0";
+            }
+        }
+        return "1";
+    }
 }

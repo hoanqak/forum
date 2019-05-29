@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="dec" uri="http://www.opensymphony.com/sitemesh/decorator" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <title><dec:title>Home</dec:title></title>
@@ -33,10 +34,39 @@
                 <div class="form-group">
                     <label>Mật khẩu: </label><input type="password" id="password" name="password" class="form-control">
                 </div>
+                <div class="m-2 d-flex justify-content-center" id="msg-error"></div>
                 <div class="b">
                     <button type="button" id="btn" class="btn btn-primary">Đăng nhập</button>
                 </div>
-                <a href="#">Quên mật khẩu</a>
+                <a class="m-3" style="display: block" href="#">Quên mật khẩu</a>
+            </form>
+        </div>
+    </div>
+    <%--    register--%>
+    <div class="form-register">
+        <div class="main-form-register">
+            <h1 style="text-align: center">Đăng ký</h1>
+            <div class="btn-close">x</div>
+            <form method="post">
+                <div class="form-group">
+                    <label>Tên đăng nhập: </label><input type="text" id="username-reg" name="username-reg"
+                                                         class="form-control">
+                    <div class="m-2" style="float: right;" id="error-username"></div>
+                </div>
+                <div class="form-group">
+                    <label>Mật khẩu: </label><input type="password" id="password-reg" name="password-reg"
+                                                    class="form-control">
+                    <div class="m-2" style="float: right;" id="error-password"></div>
+                </div>
+                <div class="form-group">
+                    <label>Nhập lại mật khẩu: </label><input type="password" id="rpassword-reg" name="password-reg"
+                                                             class="form-control">
+                    <div class="m-2" style="float: right;" id="error-rpassword"></div>
+                </div>
+                <div class="clear"></div>
+                <div class="b">
+                    <button type="button" id="btn-register" class="btn btn-primary">Đăng ký</button>
+                </div>
             </form>
         </div>
     </div>
@@ -49,7 +79,7 @@
             <a href="${ pageContext.request.contextPath}/forum">Diễn đàn</a>
             <c:if test="${sessionScope.user == null}">
                 <a id="login">Đăng nhập</a>
-                <a href="${ pageContext.request.contextPath}/register">Đăng ký</a>
+                <a id="register">Đăng ký</a>
             </c:if>
         </div>
     </div>

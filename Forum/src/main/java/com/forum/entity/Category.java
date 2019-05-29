@@ -1,7 +1,6 @@
 package com.forum.entity;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,7 +17,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-public class Category {
+public class Category{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,7 +48,6 @@ public class Category {
 		this.createDate = createDate;
 		this.updateDate = updateDate;
 	}
-
 	public Category(String link, String categoryName) {
 		super();
 		this.link = link;
@@ -61,10 +59,11 @@ public class Category {
 		this.link = link;
 		this.categoryName = categoryName;
 		this.statusCategory = statusCategory;
+
 	}
 
 	public Category() {
-		super();
+
 	}
 
 	public int getId() {
@@ -123,4 +122,7 @@ public class Category {
 		this.listPost = listPost;
 	}
 
+	public static void main(String[] args) {
+
+	}
 }

@@ -17,6 +17,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
 @Entity
 @Table(name = "post")
 public class Post {
@@ -48,9 +49,35 @@ public class Post {
 	private Category category;
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "post")
 	private List<Comment> listComment;
-	
+	@OneToMany(mappedBy = "post")
+	private List<LikePost> listLike;
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
+
+	public List<Comment> getListComment() {
+		return listComment;
+	}
+
+	public void setListComment(List<Comment> listComment) {
+		this.listComment = listComment;
+	}
+
+	public List<LikePost> getListLike() {
+		return listLike;
+	}
+
+	public void setListLike(List<LikePost> listLike) {
+		this.listLike = listLike;
+	}
+
 	public Post(String title, String sortDescription, String longDescription, Date createDate, Date updateDate,
-			Account account, Category category) {
+				Account account, Category category) {
 		super();
 		this.title = title;
 		this.sortDescription = sortDescription;
@@ -129,4 +156,20 @@ public class Post {
 		this.category = category;
 	}
 
+	@Override
+	public String toString() {
+		return "Post{" +
+				"id=" + id +
+				", title='" + title + '\'' +
+				", sortDescription='" + sortDescription + '\'' +
+				", longDescription='" + longDescription + '\'' +
+				", createDate=" + createDate +
+				", updateDate=" + updateDate +
+				", account=" + account +
+				", statusPost=" + statusPost +
+				", category=" + category +
+				", listComment=" + listComment +
+				", listLike=" + listLike +
+				'}';
+	}
 }

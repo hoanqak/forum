@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: gacon
@@ -17,42 +18,45 @@
         <!-- new post -->
         <div class="new-post mb-5 pb-2">
             <h5>Bài biết mới nhất</h5>
-            <div class="list-new-post">
-                <div class="noidung">
-                    <ul>
-                        <li>
-                            <img src="http://via.placeholder.com/70x70" style="border-radius: 5px">
-                        </li>
-                        <li class="pl-2">
-                            <p><kbd>Category</kbd> 19 minute</p>
-                            <p><a href="#">Pictures, abstract symbols, materials</a></p>
-                            <p>
-                                <i class="far fa-heart"></i> 0 <i class="far fa-comment"></i> 0 <i
-                                    class="far fa-user"></i> Admin
-                            </p>
-                        </li>
-                    </ul>
+            <c:forEach items="${ newPost}" var="post">
+                <div class="list-new-post">
+                    <div class="noidung">
+                        <ul>
+                            <li>
+                                <img src="http://via.placeholder.com/70x70" style="border-radius: 5px">
+                            </li>
+                            <li class="pl-2">
+                                <p><kbd>${post.category.categoryName}</kbd> 19 minute</p>
+                                <p><a href="#">${ post.title}</a></p>
+                                <p>
+                                    <i class="far fa-heart"></i> ${ post.listLike.size()} <i class="far fa-comment"></i> ${ post.listComment.size()}  <i
+                                        class="far fa-user"></i> ${ post.account.username}
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <hr>
+                <hr>
+            </c:forEach>
         </div>
         <!-- end new post -->
 
         <!-- category -->
         <div class="new-post mb-5 pb-2">
             <h5>Chuyên mục</h5>
-
-            <div class="row mt-3 mb-3">
-                <div class="col-1 text-center p-3"><i class="fas fa-box-open"></i></div>
-                <div class="col-11">
-                    <div class="row category-forum">
-                        <a href="#">Category 1</a>
-                    </div>
-                    <div class="row" style="font-size: 12px;">
-                        Đề tài thảo luận: 872 Bài viết: 20,721
+            <c:forEach items="${ category }" var="category1">
+                <div class="row mt-3 mb-3">
+                    <div class="col-1 text-center p-3"><i class="fas fa-box-open"></i></div>
+                    <div class="col-11">
+                        <div class="row category-forum">
+                            <a href="${ pageContext.request.contextPath}/${ category1.id}">${ category1.categoryName}</a>
+                        </div>
+                        <div class="row" style="font-size: 12px;">
+                            Đề tài thảo luận: ${ category1.listPost.size()}
+                        </div>
                     </div>
                 </div>
-            </div>
+            </c:forEach>
         </div>
     </div>
     <!-- end category -->

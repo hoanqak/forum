@@ -1,14 +1,19 @@
 package com.forum.dao.impl;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
+import com.forum.entity.Post;
 import org.hibernate.Session;
 
 import com.forum.dao.CategoryDAO;
 import com.forum.entity.Category;
 import com.forum.entity.StatusCategory;
 import com.sell.hibernateUI.HibernateUI;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class CategoryImpl implements CategoryDAO {
 
 	public void insert(Category category) {
@@ -61,6 +66,13 @@ public class CategoryImpl implements CategoryDAO {
 		Session session = HibernateUI.getSession();
 		category = session.get(Category.class, id);
 		session.close();
+		Collections.sort(category.getListPost(), new Comparator<Post>() {
+			public int compare(Post o1, Post o2) {
+				if(o1.getId() < o2.getId())
+					return 1;
+				else return -1;
+			}
+		});
 		return category;
 	}
 
@@ -73,4 +85,11 @@ public class CategoryImpl implements CategoryDAO {
 		return list;
 	}
 
+	public static void main(String[] args) {
+		CategoryImpl category = new CategoryImpl();
+		for (Post post: category.getCategory(1).getListPost()
+			 ) {
+			System.out.println(post.getId());
+		}
+	}
 }
