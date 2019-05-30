@@ -15,6 +15,11 @@
 <%--        <small>k0pehaykh0k</small>--%>
 <%--    </div>--%>
 <%--</div>--%>
+<html>
+<head>
+<title>${ post.title } - ${ post.category.categoryName}</title>
+</head>
+<body>
 <div class="row">
     <ol class="breadcrumb" style="width: 100%;">
         <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
@@ -24,17 +29,17 @@
 </div>
 <div class="row">
     <div class="title-post">
-        <p>Ipsum is simply dummy text of the printing</p>
+        <p>${ post.title}</p>
         <hr>
     </div>
 </div>
 <div class="row mt-2 mb-2">
     <div class="col-2 p-0">
         <div class="card" style="width: 100%;">
-            <img class="card-img-top img-thumbnail" src="https://data2.m4v.me/files/users/avatar/1000055960.png"
+            <img class="card-img-top img-thumbnail" src="https://kenh14cdn.com/Images/Uploaded/Share/2011/05/19/190511co3la1.jpg"
                  alt="Card image cap">
             <div class="card-body">
-                <h6 class="card-title">Admin</h6>
+                <h6 class="card-title">${ post.account.username}</h6>
                 <p><img src="https://data2.m4v.me/level/chienvang.gif"/></p>
                 <p style="color: red">♥♥♥♥♥</p>
                 <p style="color: #a111dc">Hổ báo trường mẫu giáo</p>
@@ -42,55 +47,56 @@
         </div>
     </div>
     <div class="col-10 content-cmt">
-        <kbd class="bg-primary like">5♥</kbd>
+        <kbd class="bg-primary like">${ post.listLike.size()}♥</kbd>
         <div class="content-cmt-top">
             <small>10/10/2010 21:14 | #1</small>
         </div>
         <div class="btn-like"><a href="#">Like</a></div>
         <div class="btn-quote"><a href="#">Trích</a></div>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-        standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-        a type specimen book. It has
-        survived not only five centuries, but also the leap into electronic typesetting, remaining essentially
-        unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-        and more recently with
-        desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Why do we use it? It is a
-        long established fact that a reader will be distracted by the readable content of a page when looking at its
-        layout. The point
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-        standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-        a type specimen
-        book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining
-        essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem
-        Ipsum passages, and more
-        recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Why do we use
-        it Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-        industry's standard
-        dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
-        specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining
-        essentially
-        unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-        and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Why
-        do we use it
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-        standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-        a type specimen
-        book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining
-        essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem
-        Ipsum passages, and more
-        recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Why do we use
-        it
+        ${ post.longDescription}
     </div>
-
 </div>
-<form>
-    <div class="row mt-5 mb-5">
-        <div class="col-10">
-            <input type="text" name="content" class="form-control">
+<c:set var="id" value="1"/>
+<c:forEach items="${ post.listComment}" var="cmt">
+    <div class="row mt-2 mb-2">
+        <div class="col-2 p-0">
+            <div class="card" style="width: 100%;">
+                <img class="card-img-top img-thumbnail" src="https://kenh14cdn.com/Images/Uploaded/Share/2011/05/19/190511co3la1.jpg"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <h6 class="card-title">${ cmt.account.username}</h6>
+                    <p><img src="https://data2.m4v.me/level/chienvang.gif"/></p>
+                    <p style="color: red">♥♥♥♥♥</p>
+                    <p style="color: #a111dc">Hổ báo trường mẫu giáo</p>
+                </div>
+            </div>
         </div>
-        <div class="col-2">
-            <input type="submit" value="Gửi" class="btn btn-primary">
+        <div class="col-10 content-cmt">
+            <kbd class="bg-primary like">♥</kbd>
+            <div class="content-cmt-top">
+                <small>${ cmt.createDate} | #${ id }</small>
+                <c:set var="id" value="${ id + 1 }"/>
+            </div>
+            <div class="btn-like"><a href="#">Like</a></div>
+            <div class="btn-quote"><a href="#">Trích</a></div>
+                ${ cmt.content}
         </div>
     </div>
-</form>
+</c:forEach>
+<c:if test="${ sessionScope.user != null}">
+    <form method="post">
+        <div class="row mt-5 mb-5">
+            <div class="col-10">
+                <input type="text" name="content" id="content" class="form-control">
+            </div>
+            <div class="col-2">
+                <button id="btn-send-comment" type="button" class="btn btn-primary">Gửi</button>
+            </div>
+        </div>
+    </form>
+</c:if>
 <script src="<c:url value="/resources/js/javascript-post.js"/>"></script>
+
+</body>
+</html>
+

@@ -1,5 +1,7 @@
 package com.forum.entity;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -22,154 +24,163 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Table(name = "post")
 public class Post {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	@Column(name = "title", length = 100)
-	private String title;
-	@Column(length = 100, name = "sort_description")
-	private String sortDescription;
-	@Column(length = 1000, name = "long_description")
-	private String longDescription;
-	@Column(name = "create_date")
-	@CreationTimestamp
-	private Date createDate;
-	@Column(name = "update_date")
-	@UpdateTimestamp
-	private Date updateDate;
-	
-	@ManyToOne
-	@JoinColumn(name = "id_account")
-	private Account account;
-	@ManyToOne
-	@JoinColumn(name = "id_status")
-	private StatusPost statusPost;
-	@ManyToOne
-	@JoinColumn(name = "id_category")
-	private Category category;
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "post")
-	private List<Comment> listComment;
-	@OneToMany(mappedBy = "post")
-	private List<LikePost> listLike;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Column(name = "title", length = 100)
+    private String title;
+    @Column(length = 100, name = "sort_description")
+    private String sortDescription;
+    @Column(length = 1000, name = "long_description")
+    private String longDescription;
+    @Column(name = "create_date")
+    @CreationTimestamp
+    private Date createDate;
+    @Column(name = "update_date")
+    @UpdateTimestamp
+    private Date updateDate;
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
+    @ManyToOne
+    @JoinColumn(name = "id_account")
+    private Account account;
+    @ManyToOne
+    @JoinColumn(name = "id_status")
+    private StatusPost statusPost;
+    @ManyToOne
+    @JoinColumn(name = "id_category")
+    private Category category;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "post")
+    private List<Comment> listComment;
+    @OneToMany(mappedBy = "post")
+    private List<LikePost> listLike;
 
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
-	}
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
 
-	public List<Comment> getListComment() {
-		return listComment;
-	}
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
 
-	public void setListComment(List<Comment> listComment) {
-		this.listComment = listComment;
-	}
+    public List<Comment> getListComment() {
+        Collections.sort(this.listComment, new Comparator<Comment>() {
+            public int compare(Comment o1, Comment o2) {
+                if (o1.getId() > o2.getId())
+                    return 1;
+                else
+                    return -1;
+            }
+        });
 
-	public List<LikePost> getListLike() {
-		return listLike;
-	}
+        return listComment;
+    }
 
-	public void setListLike(List<LikePost> listLike) {
-		this.listLike = listLike;
-	}
+    public void setListComment(List<Comment> listComment) {
+        this.listComment = listComment;
+    }
 
-	public Post(String title, String sortDescription, String longDescription, Date createDate, Date updateDate,
-				Account account, Category category) {
-		super();
-		this.title = title;
-		this.sortDescription = sortDescription;
-		this.longDescription = longDescription;
-		this.createDate = createDate;
-		this.updateDate = updateDate;
-		this.account = account;
-		this.category = category;
-	}
+    public List<LikePost> getListLike() {
+        return listLike;
+    }
 
-	public Post() {
-		super();
-	}
+    public void setListLike(List<LikePost> listLike) {
+        this.listLike = listLike;
+    }
 
-	public int getId() {
-		return id;
-	}
+    public Post(String title, String sortDescription, String longDescription, Date createDate, Date updateDate,
+                Account account, Category category) {
+        super();
+        this.title = title;
+        this.sortDescription = sortDescription;
+        this.longDescription = longDescription;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+        this.account = account;
+        this.category = category;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public Post() {
 
-	public String getTitle() {
-		return title;
-	}
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public String getSortDescription() {
-		return sortDescription;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setSortDescription(String sortDescription) {
-		this.sortDescription = sortDescription;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public String getLongDescription() {
-		return longDescription;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public void setLongDescription(String longDescription) {
-		this.longDescription = longDescription;
-	}
+    public String getSortDescription() {
+        return sortDescription;
+    }
 
-	public Date getCreateDate() {
-		return createDate;
-	}
+    public void setSortDescription(String sortDescription) {
+        this.sortDescription = sortDescription;
+    }
 
-	public Date getUpdateDate() {
-		return updateDate;
-	}
+    public String getLongDescription() {
+        return longDescription;
+    }
 
-	public Account getAccount() {
-		return account;
-	}
+    public void setLongDescription(String longDescription) {
+        this.longDescription = longDescription;
+    }
 
-	public void setAccount(Account account) {
-		this.account = account;
-	}
+    public Date getCreateDate() {
+        return createDate;
+    }
 
-	public StatusPost getStatusPost() {
-		return statusPost;
-	}
+    public Date getUpdateDate() {
+        return updateDate;
+    }
 
-	public void setStatusPost(StatusPost statusPost) {
-		this.statusPost = statusPost;
-	}
+    public Account getAccount() {
+        return account;
+    }
 
-	public Category getCategory() {
-		return category;
-	}
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 
-	public void setCategory(Category category) {
-		this.category = category;
-	}
+    public StatusPost getStatusPost() {
+        return statusPost;
+    }
 
-	@Override
-	public String toString() {
-		return "Post{" +
-				"id=" + id +
-				", title='" + title + '\'' +
-				", sortDescription='" + sortDescription + '\'' +
-				", longDescription='" + longDescription + '\'' +
-				", createDate=" + createDate +
-				", updateDate=" + updateDate +
-				", account=" + account +
-				", statusPost=" + statusPost +
-				", category=" + category +
-				", listComment=" + listComment +
-				", listLike=" + listLike +
-				'}';
-	}
+    public void setStatusPost(StatusPost statusPost) {
+        this.statusPost = statusPost;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", sortDescription='" + sortDescription + '\'' +
+                ", longDescription='" + longDescription + '\'' +
+                ", createDate=" + createDate +
+                ", updateDate=" + updateDate +
+                ", account=" + account +
+                ", statusPost=" + statusPost +
+                ", category=" + category +
+                ", listComment=" + listComment +
+                ", listLike=" + listLike +
+                '}';
+    }
 }

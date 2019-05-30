@@ -27,9 +27,9 @@
                             </li>
                             <li class="pl-2">
                                 <p><kbd>${post.category.categoryName}</kbd> 19 minute</p>
-                                <p><a href="#">${ post.title}</a></p>
+                                <p><a href="${post.category.id}/${ post.id}">${ post.title}</a></p>
                                 <p>
-                                    <i class="far fa-heart"></i> ${ post.listLike.size()} <i class="far fa-comment"></i> ${ post.listComment.size()}  <i
+                                    <i class="far fa-heart" id="heart"></i> ${ post.listLike.size()} <i class="far fa-comment" id="cmt-icon"></i> ${ post.listComment.size()}  <i
                                         class="far fa-user"></i> ${ post.account.username}
                                 </p>
                             </li>

@@ -20,9 +20,10 @@ public class MainController {
         model.addAttribute("newPost", postimpl.getNewPost());
         return "index";
     }
-    @RequestMapping("/post")
-    public String post(){
-        return "post";
+    @RequestMapping("/{category}/{id}")
+    public String post(@PathVariable("category") int category, @PathVariable("id") int id, Model model){
+        model.addAttribute("post", categoryimpl.getPostById(category, id));
+        return "/post";
     }
     @RequestMapping("/login")
     public String login(){

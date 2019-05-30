@@ -170,3 +170,9 @@
     cursor: pointer;
     color: white;
 }
+#heart{
+    color: red;
+}
+#cmt-icon{
+    color: dodgerblue;
+}

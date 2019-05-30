@@ -75,7 +75,14 @@ public class CategoryImpl implements CategoryDAO {
 		});
 		return category;
 	}
-
+    public Post getPostById(int categoryId, int postId){
+	    for(Post post : getCategory(categoryId).getListPost()){
+	        if(post.getId() == postId){
+	            return post;
+            }
+        }
+	    return null;
+    }
 	@SuppressWarnings("unchecked")
 	public List<Category> getListCategory() {
 		List<Category> list = null;

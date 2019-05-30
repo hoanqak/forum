@@ -1,7 +1,10 @@
 package com.forum.dao.impl;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
+import com.forum.entity.Comment;
 import org.hibernate.Session;
 
 import com.forum.dao.PostDAO;

@@ -1,5 +1,6 @@
 package com.forum.entity;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 

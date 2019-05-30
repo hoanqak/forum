@@ -1,10 +1,11 @@
 $(".form-login").hide();
 $(".form-register").hide();
+var path = "/Forum_war_exploded/"
 $(function () {
     $("#btn").click(function () {
         var username = $("#username").val();
         var password = $("#password").val();
-        $.post("api/login", {username: username, password: password}, function (response) {
+        $.post(path + "api/login", {username: username, password: password}, function (response) {
             if (response == 1) {
                 location.reload();
             } else {
@@ -28,7 +29,7 @@ $(function () {
         if (username_reg == "" || username_reg.length <= 5) {
             $("#error-username").html("<small class='m-2' style='color:red'>Tên tài khoản phải lớn hơn 5 ký tự</small>");
         } else {
-            $.post("api/check-username", {username: username_reg}, function (resp) {
+            $.post(path + "api/check-username", {username: username_reg}, function (resp) {
                 if (resp == "1") {
                     $("#error-username").html("");
                 } else {
@@ -58,12 +59,15 @@ $(function () {
     $("#btn-register").click(function () {
         var username_reg = $("#username-reg").val();
         var password_reg = $("#password-reg").val();
-        var rpassword_reg = $("#rpassword-reg").val();
+        var rpassword_reg = $("#rpassword-reg").val(
+
+        );
         if (username_reg.length > 5 && password_reg === rpassword_reg) {
-            $.post("api/register", {username: username_reg, password: password_reg}, function (response) {
+            $.post(path + "api/register", {username: username_reg, password: password_reg}, function (response) {
                 if (response == "1")
                     alert("Đăng ký thành công !");
             });
         }
     });
+
 })

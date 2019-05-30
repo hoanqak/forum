@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <decorators defaultdir="/decorator">
-    <decorator name="api" page="api.jsp">
-        <pattern>/api**</pattern>
-    </decorator>
+   <excludes>
+       <pattern>/api**</pattern>
+   </excludes>
     <decorator name="admin" page="admin.jsp">
         <pattern>/admin**</pattern>
     </decorator>
