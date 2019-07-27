@@ -29,8 +29,8 @@ public class Post {
     private int id;
     @Column(name = "title", length = 100)
     private String title;
-    @Column(length = 100, name = "sort_description")
-    private String sortDescription;
+    @Column(length = 100, name = "short_description")
+    private String shortDescription;
     @Column(length = 1000, name = "long_description")
     private String longDescription;
     @Column(name = "create_date")
@@ -91,7 +91,7 @@ public class Post {
                 Account account, Category category) {
         super();
         this.title = title;
-        this.sortDescription = sortDescription;
+        this.shortDescription = sortDescription;
         this.longDescription = longDescription;
         this.createDate = createDate;
         this.updateDate = updateDate;
@@ -120,11 +120,11 @@ public class Post {
     }
 
     public String getSortDescription() {
-        return sortDescription;
+        return shortDescription;
     }
 
     public void setSortDescription(String sortDescription) {
-        this.sortDescription = sortDescription;
+        this.shortDescription = sortDescription;
     }
 
     public String getLongDescription() {
@@ -172,7 +172,7 @@ public class Post {
         return "Post{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", sortDescription='" + sortDescription + '\'' +
+                ", sortDescription='" + shortDescription + '\'' +
                 ", longDescription='" + longDescription + '\'' +
                 ", createDate=" + createDate +
                 ", updateDate=" + updateDate +

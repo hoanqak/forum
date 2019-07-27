@@ -18,14 +18,14 @@ public class Role {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column
-	private String role;
+	@Column(name = "role_name")
+	private String roleName;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
 	private List<Account> listAccounts;
 
 	public Role(String role) {
 		super();
-		this.role = role;
+		this.roleName = role;
 	}
 
 	public Role() {
@@ -41,11 +41,11 @@ public class Role {
 	}
 
 	public String getRole() {
-		return role;
+		return roleName;
 	}
 
 	public void setRole(String role) {
-		this.role = role;
+		this.roleName = role;
 	}
 
 	public List<Account> getListAccounts() {
